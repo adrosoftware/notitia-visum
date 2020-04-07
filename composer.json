@@ -3,6 +3,16 @@
     "description": "BREAD (browse, read, edit, add, delete) generator for Laravel",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "bread",
+        "adorsoftware"
+    ],
+    "support": {
+        "issues": "https://github.com/adrosoftware/notitia-visum/issues",
+        "source": "https://github.com/adrosoftware/notitia-visum"
+    },
+    "homepage": "http://github.com/adrosoftware/notitia-visum",
     "authors": [
         {
             "name": "Adro Rocker",
