@@ -1,0 +1,34 @@
+{
+    "name": "adrosoftware/notitia-visum",
+    "description": "BREAD (browse, read, edit, add, delete) generator for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adro Rocker",
+            "email": "me@adro.rocks"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "NotitiaVisum\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotitiaVisum\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotitiaVisum\\Provider\\NotitiaVisumServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.1"
+    }
+}
