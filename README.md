@@ -7,6 +7,46 @@
 
 Notitia Visum is a BREAD (browse, read, edit, add, delete) generator for [Laravel](https://laravel.com/)
 
+### Usage
+
+Brows usage:
+
+```php
+/**
+ * Inside a controller action
+ */
+return (new NotitiaVisum())
+    ->table('users')
+    ->browse();
+```
+
+You can add a raw where like this:
+
+```php
+return (new NotitiaVisum())
+    ->table('users')
+    ->whereRaw('role = \'admin\'')
+    ->browse();
+```
+
+If you want to filter the fields to render in the table, you can add an array of fields:
+
+```php
+return (new NotitiaVisum())
+    ->table('users')
+    ->whereRaw('role = \'admin\'')
+    ->browse(['id', 'first_name', 'role']);
+```
+
+By default the title on the table is the table name on the database but you can override it like this:
+
+```php
+return (new NotitiaVisum())
+    ->table('users')
+    ->title('System Users')
+    ->browse(['id', 'first_name', 'role']);
+```
+
 ### Tests
 
 ```bash

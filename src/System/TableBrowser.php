@@ -14,13 +14,34 @@ class TableBrowser
 
     protected $editRoute;
 
-    public function __construct(LengthAwarePaginator $paginator, $pkColumn = null, $editRoute = null)
+    protected $table;
+
+    protected $title;
+
+    public function __construct($table, LengthAwarePaginator $paginator, $pkColumn = null, $editRoute = null)
     {
+        $this->table = $table;
         $this->paginator = $paginator;
         $this->pkColumn = $pkColumn;
         $this->editRoute = $editRoute;
 
         $this->setPaginatorView();
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = strval($title);
+
+        return $this;
+    }
+
+    public function title()
+    {
+        if ($this->title === null) {
+            return $this->table;
+        }
+
+        return $this->title;
     }
 
     public function records()
@@ -47,6 +68,17 @@ class TableBrowser
 
             $this->paginator->setCollection($collection);
         }
+
+        $collection = collect($this->paginator->items())->map(function ($record) {
+            if (isset($record->row_num) ) {
+                unset($record->row_num);
+            }
+
+            return $record;
+        });
+
+        $this->paginator->setCollection($collection);
+
         return $this->paginator->items();
     }
 
@@ -72,6 +104,10 @@ class TableBrowser
         }
 
         $item = $this->paginator->first();
+
+        if (isset($item->row_num)) {
+            unset($item->row_num);
+        }
 
         return array_keys(get_object_vars($item));
     }

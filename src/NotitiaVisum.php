@@ -9,17 +9,40 @@ use NotitiaVisum\System\TableBrowser;
 
 class NotitiaVisum
 {
+    /**
+     * @var string The database connection name.
+     */
     private $connectionName;
 
+    /**
+     * @var string The table name.
+     */
     private $table;
 
+    /**
+     * @var string The primary key field name.
+     */
     private $pk;
 
+    /**
+     * @var string The edit route name.
+     */
     private $editRoute;
 
+    /**
+     * @var string The read (spacific record) route name.
+     */
     private $readRoute;
 
+    /**
+     * @var string The `where` raw query statement.
+     */
     private $whereRaw;
+
+    /**
+     * @var string The `title` on the browser table.
+     */
+    private $title;
 
     public function __construct(
         $connectionName = null,
@@ -33,6 +56,13 @@ class NotitiaVisum
         $this->connectionName = $connectionName;
         $this->table = $table;
         $this->pk = $pk;
+    }
+
+    public function title($title)
+    {
+        $this->title = strval($title);
+
+        return $this;
     }
 
     public function table($table)
@@ -81,8 +111,6 @@ class NotitiaVisum
     public function browse($fields = ['*'])
     {
         if ($this->whereRaw !== null) {
-            // Build SELECT statement.
-            // $select "SELECT " implode(',', $fields)
             /** @var LengthAwarePaginator */
             $paginator = DB::connection($this->connectionName)
                 ->table($this->table)->select($fields)->whereRaw($this->whereRaw)->paginate();
@@ -98,9 +126,13 @@ class NotitiaVisum
                 ->table($this->table)->select($fields)->paginate();
         }
 
-        $browser =  new TableBrowser($paginator, $this->pk, $this->editRoute, $this->readRoute);
+        $browser =  new TableBrowser($this->table, $paginator, $this->pk, $this->editRoute, $this->readRoute);
 
         $browser->getColumns();
+
+        if ($this->title !== null) {
+            $browser->setTitle($this->title);
+        }
 
         return view('notitia-visum::browse', ['browser' => $browser]);
     }
