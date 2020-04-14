@@ -5,6 +5,8 @@
 [![Latest Stable Version][Stable version image]][Stable version]
 [![License][License image]][License]
 
+> This is a WIP package. **B**read
+
 Notitia Visum is a BREAD (browse, read, edit, add, delete) generator for [Laravel](https://laravel.com/)
 
 ### Usage
