@@ -139,41 +139,17 @@ class NotitiaVisum
 
     public function read()
     {
-        $paginator = DB::connection($this->connectionName)
-        ->table($this->table)->select('*')->paginate();
-
-        $browser =  new TableBrowser($paginator, $this->pk, $this->editRoute, $this->readRoute);
-
-        return view('notitia-visum::browse', ['browser' => $browser]);
     }
 
     public function edit()
     {
-        $paginator = DB::connection($this->connectionName)
-            ->table($this->table)->select('*')->paginate();
-
-        $browser =  new TableBrowser($paginator, $this->pk, $this->editRoute, $this->readRoute);
-
-        return view('notitia-visum::browse', ['browser' => $browser]);
     }
 
     public function add()
     {
-        $paginator = DB::connection($this->connectionName)
-            ->table($this->table)->select('*')->paginate();
-
-        $browser =  new TableBrowser($paginator, $this->pk, $this->editRoute, $this->readRoute);
-
-        return view('notitia-visum::browse', ['browser' => $browser]);
     }
 
     public function delete()
     {
-        $paginator = DB::connection($this->connectionName)
-            ->table($this->table)->select('*')->paginate();
-
-        $browser =  new TableBrowser($paginator, $this->pk, $this->editRoute, $this->readRoute);
-
-        return view('notitia-visum::browse', ['browser' => $browser]);
     }
 }
